@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Grabhouse</title>
+
+    <!-- Bootstrap -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="theme.css">
+  <style type="text/css">
+
+#dash{
+  visibility: hidden;
+}
+
+body{
+  background-color: #111;
+}
+  </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid" >
+    <div class="navbar-header">
+
+      <a href="index.html" class="navbar-brand"><b>GrabHouse Owner dashboard</b></a>
+
+    
+
+     
+  </div>
+</div>
+</nav>
+<br><br>
+<div class="container" style="padding-top: 50px;">
+  <h1></h1>
+
+<div class="panel panel-primary" id="dash">
+  <div class="panel-heading">
+    <h3 class="panel-title">Prospects request panel</h3>
+  </div>
+  <div class="panel-body">
+
+    <div class="row">
+
+<div class="col-xs-7"><img src="http://img13.deviantart.net/ccc7/i/2010/182/2/d/facebook_avatar_3_by_cynfullpryde.jpg" class="img-circle img-responsive" width="100" height="100" ><a href="" id="uname" class="pull-left">Username</a></div>
+ <div class="col-xs-5"><a class="btn  btn-primary" id="grant" style="margin-top: 50px; ">Grant key</a></div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+ <script type="text/javascript">
+
+ $(document).ready(function(){
+ $.ajax({url:"http://84.200.84.218:3000/get_rqsts",method:"POST",crossDomain:true}).success(function(data){
+
+  console.log(data);
+  if(data){
+    $('#uname').text(data.fbname).attr("href",data.link);
+  $('#dash').css("visibility","visible");
+
+  }
+
+$('#grant').click(function(){
+
+  $.ajax({url:"http://84.200.84.218:3000/grant",method:"POST",crossDomain:true}).success(function(data){
+
+    console.log(data);
+    alert(data);
+
+    $('#grant').disabled();
+  })
+
+})
+
+
+
+  
+
+ })
+ });
+
+
+ </script>
+
+
+  </body>
+</html>
